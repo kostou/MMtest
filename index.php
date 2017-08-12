@@ -1,7 +1,7 @@
 <?php
 require_once 'errorHandling.php';
 require_once 'config.php';
-
+ini_set('memory_limit', '1024M');
 
 $className = "";
 if (isset($argv[1]))
@@ -40,7 +40,7 @@ if (class_exists('MMtest\\Kostas\\'.$className)) {
         }
         else 
         {
-            echo "Please enter valid file selector (1-3)";
+            customError(E_USER_ERROR, "Please enter valid file selector (1-3)", __FILE__, __LINE__);
         }
     }
     
@@ -50,9 +50,9 @@ if (class_exists('MMtest\\Kostas\\'.$className)) {
 } 
 elseif (trim($className==""))
 {
-    echo "Please specify function name\n";
+    customError(E_USER_ERROR, "Please specify class name\n", __FILE__, __LINE__);
 }
 else {
-    echo "Class ". $className. " does not exist\n";
+    customError(E_USER_ERROR, "Class ". $className. " does not exist\n", __FILE__, __LINE__);
 }
 ?>

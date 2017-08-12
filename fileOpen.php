@@ -1,5 +1,7 @@
 <?php
 
+namespace MMtest\Kostas;
+
 class fileOpen
 {
     private $fileHandle;
@@ -8,7 +10,7 @@ class fileOpen
         $this->fileHandle = fopen($filePath, "rb");
         if (!$this->fileHandle)
         {
-            echo "Could not open file";
+            customError(E_USER_ERROR, "Could not open file", __FILE__, __LINE__);
             exit;
         }
     }

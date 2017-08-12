@@ -22,7 +22,7 @@ class selectionSort
     
     public function doProcess($filePath,$filePathOut,$time_start)
     {
-        $oFileOpen = new \fileOpen($filePath);
+        $oFileOpen = new fileOpen($filePath);
         $fileHandle = $oFileOpen->getHandle();
         while (!feof($fileHandle))
         {

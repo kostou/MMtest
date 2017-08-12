@@ -6,7 +6,6 @@ class bubblesort
 {
     public $currentFilePointer;
     public $currentNumber;
-    public $loopCounter;
     public $aRaw = array();
     public $aSorted = array();
     public $bSorted = FALSE;
@@ -24,18 +23,13 @@ class bubblesort
     
     public function doProcess($filePath,$filePathOut,$time_start)
     {
-        $oFileOpen = new \fileOpen($filePath);
+        $oFileOpen = new fileOpen($filePath);
         $fileHandle = $oFileOpen->getHandle();
         while (!feof($fileHandle))
         {
             $this->currentFilePointer = ftell($fileHandle);
             $this->currentNumber = stream_get_line($fileHandle, 1024, ",");
             $this->aRaw[] = $this->currentNumber;
-            //$this->loopCounter++;
-            //echo "filePointer: ".$this->currentFilePointer."\n";
-            //echo "current number: ".$this->currentNumber."\n";
-            //echo "loop counter: ".$this->loopCounter."\n";
-            
         }
         
         $this->max = count($this->aRaw);
