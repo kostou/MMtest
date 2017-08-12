@@ -19,7 +19,7 @@ if (file_exists($className.".php"))
     exit;
 }
 
-if (class_exists($className)) {
+if (class_exists('MMtest\\Kostas\\'.$className)) {
     if (isset($argv[2]))
     {
         $fileSelector = $argv[2];
@@ -45,13 +45,14 @@ if (class_exists($className)) {
     }
     
     $time_start = microtime(true);
+    $className = 'MMtest\\Kostas\\'.$className;
     $oProcessor = new $className($filePath,$filePathOut,$time_start);
 } 
-elseif (trim($functionName==""))
+elseif (trim($className==""))
 {
     echo "Please specify function name\n";
 }
 else {
-    echo "Function ". $functionName. " does not exist\n";
+    echo "Class ". $className. " does not exist\n";
 }
 ?>

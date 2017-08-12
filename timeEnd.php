@@ -1,4 +1,7 @@
 <?php
+
+namespace MMtest\Kostas;
+
 class timeEnd
 {
     public $timePassed;

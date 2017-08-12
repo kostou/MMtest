@@ -1,5 +1,7 @@
 <?php
 
+namespace MMtest\Kostas;
+
 class bubblesort
 {
     public $currentFilePointer;
@@ -15,7 +17,7 @@ class bubblesort
     public function __construct($filePath, $filePathOut, $time_start) {
         $this->doProcess($filePath, $filePathOut, $time_start);
         $this->executionTime = new timeEnd($time_start);
-        new writeToFile($filePathOut, $this->aSorted, $this->executionTime->timePassed);
+        new writeToFile($filePathOut, $this->aSorted, $this->executionTime->timePassed,__CLASS__);
         echo "Time passed: ".$this->executionTime->timePassed." Seconds";
     }
 
@@ -30,6 +32,7 @@ class bubblesort
         }
         while (!feof($fileHandle))
         {
+            $this->currentFilePointer = ftell($fileHandle);
             $this->currentNumber = stream_get_line($fileHandle, 1024, ",");
             $this->aRaw[] = $this->currentNumber;
             //$this->loopCounter++;
@@ -63,9 +66,7 @@ class bubblesort
                 break;
             }
         }
-        //print_r($this->aSorted);
-        //$executionTime = $this->timeEnd($time_start);
-        //echo "Time passed: ".$executionTime." Seconds";
+        fclose($fileHandle);
     }
 }
 

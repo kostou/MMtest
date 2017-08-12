@@ -1,5 +1,7 @@
 <?php
 
+namespace MMtest\Kostas;
+
 class myTestAlgorithm
 {
     public $currentFilePointer;
@@ -14,7 +16,7 @@ class myTestAlgorithm
     public function __construct($filePath, $filePathOut, $time_start) {
         $this->doProcess($filePath, $filePathOut, $time_start);
         $this->executionTime = new timeEnd($time_start);
-        new writeToFile($filePathOut, $this->aSorted, $this->executionTime->timePassed);
+        new writeToFile($filePathOut, $this->aSorted, $this->executionTime->timePassed,__CLASS__);
         echo "Time passed: ".$this->executionTime->timePassed." Seconds";
     }
 
@@ -29,6 +31,7 @@ class myTestAlgorithm
         }
         while (!feof($fileHandle))
         {
+            $this->currentFilePointer = ftell($fileHandle);
             $this->currentNumber = stream_get_line($fileHandle, 1024, ",");
             if(count($this->aSorted)==0)
             {
@@ -55,15 +58,8 @@ class myTestAlgorithm
                     }
                 }
             }
-            //$this->loopCounter++;
-            //echo "filePointer: ".$this->currentFilePointer."\n";
-            //echo "current number: ".$this->currentNumber."\n";
-            //echo "loop counter: ".$this->loopCounter."\n";
-            
         }
-        //print_r($this->aSorted);
-        //$executionTime = $this->timeEnd($time_start);
-        //echo "Time passed: ".$executionTime." Seconds";
+        fclose($fileHandle);
     }
 }
 
