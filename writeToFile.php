@@ -9,6 +9,8 @@ class writeToFile
         file_put_contents($filePath, "Last run: ".$datetime.PHP_EOL);
         file_put_contents($filePath, "Algorithm (class used): ".substr(strrchr($class, "\\"), 1).PHP_EOL, FILE_APPEND);
         file_put_contents($filePath, "Time passed: ".$executionTime." Seconds".PHP_EOL, FILE_APPEND);
+        file_put_contents($filePath, "Peak memory usage: ".(memory_get_peak_usage(false)/1024/1024)." MB".PHP_EOL, FILE_APPEND);
+        
         $lastkey = count($aSorted)-1;
         $commaCharacter=",";
         foreach ($aSorted as $key => $number)

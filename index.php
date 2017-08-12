@@ -9,9 +9,9 @@ if (isset($argv[1]))
     $className = $argv[1];
 }
 
-if (file_exists($className.".php"))
+if (file_exists("./Algorithms/".$className.".php"))
 {
-    include_once $className.".php";
+    include_once "./Algorithms/".$className.".php";
 }
  else 
 {
