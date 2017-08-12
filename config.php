@@ -9,6 +9,7 @@ define('FILE2out', './files/output/sorted_10000.txt');
 define('FILE3out', './files/output/sorted_10000000.txt');
 
 require_once 'timeEnd.php';
+require_once 'fileOpen.php';
 require_once 'writeToFile.php';
 
 ?>

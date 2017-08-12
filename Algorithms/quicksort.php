@@ -2,7 +2,7 @@
 
 namespace MMtest\Kostas;
 
-class selectionSort
+class quicksort
 {
     public $currentFilePointer;
     public $currentNumber;
@@ -30,14 +30,36 @@ class selectionSort
             $this->currentNumber = stream_get_line($fileHandle, 1024, ",");
             $this->aRaw[] = $this->currentNumber;
         }
-        
-        foreach ($this->aRaw as $value)
-        {
-            $smallestValueKey = array_search(min($this->aRaw),$this->aRaw);
-            $this->aSorted[] = $this->aRaw[$smallestValueKey];
-            unset($this->aRaw[$smallestValueKey]);
-        }
+        $this->aSorted = $this->sorting($this->aRaw);
         fclose($fileHandle);
+    }
+    
+    private function sorting($aUnsorted)
+    {
+        if (count($aUnsorted)<=1)
+        {//There is only one element, so this array partition is sorted..
+            return $aUnsorted;
+        }
+        $pivotPoint = $aUnsorted[0];
+        $aBeforePivotPoint = array();
+        $aAfterPivotPoint = array();
+        $aPivotPoint = array();
+        foreach ($aUnsorted as $key => $value)
+        {
+            if ($value>$pivotPoint)
+            {
+                $aAfterPivotPoint[] = $value;
+            }
+            elseif ($value<$pivotPoint)
+            {
+                $aBeforePivotPoint[] = $value;
+            }
+            else
+            {
+                $aPivotPoint[] = $value;
+            }
+        }
+        return array_merge($this->sorting($aBeforePivotPoint), $aPivotPoint, $this->sorting($aAfterPivotPoint));
     }
 }
 

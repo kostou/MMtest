@@ -7,9 +7,8 @@ class myTestAlgorithm
     public $currentFilePointer;
     public $currentNumber;
     public $loopCounter;
-    public $aRaw;
-    public $aSorted;
-    public $bNotSorted;
+    public $aRaw = array();
+    public $aSorted = array();
     public $startTime;
     public $executionTime;
     
@@ -23,12 +22,8 @@ class myTestAlgorithm
     
     public function doProcess($filePath,$filePathOut,$time_start)
     {
-        $fileHandle = fopen($filePath, "rb");
-        if (!$fileHandle)
-        {
-            echo "Could not open file";
-            exit;
-        }
+        $oFileOpen = new \fileOpen($filePath);
+        $fileHandle = $oFileOpen->getHandle();
         while (!feof($fileHandle))
         {
             $this->currentFilePointer = ftell($fileHandle);
@@ -52,7 +47,7 @@ class myTestAlgorithm
                         break;
                     }
                     if (!isset($this->aSorted[$key+1])&&$this->currentNumber>$number)
-                    {//If larger than first element, make it last.
+                    {//If larger than last element, make it last.
                         $this->aSorted[] = $this->currentNumber;
                         break;
                     }

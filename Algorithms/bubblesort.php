@@ -7,9 +7,9 @@ class bubblesort
     public $currentFilePointer;
     public $currentNumber;
     public $loopCounter;
-    public $aRaw;
-    public $aSorted;
-    public $bSorted;
+    public $aRaw = array();
+    public $aSorted = array();
+    public $bSorted = FALSE;
     public $startTime;
     public $executionTime;
     public $max;
@@ -24,12 +24,8 @@ class bubblesort
     
     public function doProcess($filePath,$filePathOut,$time_start)
     {
-        $fileHandle = fopen($filePath, "rb");
-        if (!$fileHandle)
-        {
-            echo "Could not open file";
-            exit;
-        }
+        $oFileOpen = new \fileOpen($filePath);
+        $fileHandle = $oFileOpen->getHandle();
         while (!feof($fileHandle))
         {
             $this->currentFilePointer = ftell($fileHandle);
@@ -46,7 +42,7 @@ class bubblesort
 
         while (!$this->bSorted)
         {
-            $bThisIterationSwappedAny = false;
+            $bThisIterationSwappedAny = FALSE;
 //            foreach ($this->aRaw as $key => $value)
             
             for ($i=0; $i<$this->max; $i++)
@@ -56,10 +52,10 @@ class bubblesort
                     $tmpGreater = $this->aRaw[$i];
                     $this->aRaw[$i]=$this->aRaw[$i+1];
                     $this->aRaw[$i+1]=$tmpGreater;
-                    $bThisIterationSwappedAny = true;
+                    $bThisIterationSwappedAny = TRUE;
                 }
             }
-            if ($bThisIterationSwappedAny===false)
+            if ($bThisIterationSwappedAny===FALSE)
             {
                 $this->bSorted = true;
                 $this->aSorted = $this->aRaw;
