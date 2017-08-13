@@ -7,8 +7,8 @@ class quicksort
     public $currentFilePointer;
     public $currentNumber;
     public $loopCounter;
-    public $aRaw = array();
-    public $aSorted = array();
+    public $aRaw;
+    public $aSorted;
     public $startTime;
     public $executionTime;
     
@@ -24,12 +24,17 @@ class quicksort
     {
         $oFileOpen = new fileOpen($filePath);
         $fileHandle = $oFileOpen->getHandle();
+        $this->loopCounter = 0;
+        $this->aRaw = new \SplFixedArray(($this->loopCounter+1));
         while (!feof($fileHandle))
         {
             $this->currentFilePointer = ftell($fileHandle);
             $this->currentNumber = stream_get_line($fileHandle, 1024, ",");
-            $this->aRaw[] = $this->currentNumber;
+            $this->aRaw[$this->loopCounter] = $this->currentNumber;
+            $this->loopCounter++;
+            $this->aRaw->setSize(($this->loopCounter+1));
         }
+        $this->aSorted = new \SplFixedArray(count($this->aRaw));
         $this->aSorted = $this->sorting($this->aRaw);
         fclose($fileHandle);
     }

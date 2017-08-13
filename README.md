@@ -1,4 +1,4 @@
-# MMtest - Konstantinos Tountas
+# MMtest - KT
 
 This project serves the purpose of demonstrating a the use of different sorting algorithms in order to sort a list of numbers stored in a file.
 
@@ -19,43 +19,43 @@ php -f index.php quicksort 1
 It accepts the parameters and performs some very basic validation.
 It also loads the error handler, the configuration file and the relevant class (depending on the parameter passed).
 
-##Error handling
+## Error handling
 Implements a very basic error handling with the purpose of centralising and capturing all the errors that might occur from the execution.
 In this demonstration it wouldn't be needed because the whole process is initiated by the person who tests the application.
 However in a real scenario, this would be initiated automatically (e.g. by cron job or another external script), in which case, the customError() function should properly log the errors.
 
-##Reading from the file
+## Reading from the file
 The fileOpen class performs an fopen to get a file handler.
 Reading from the file (for all algorithms) is done using the stream_get_line() function which reads from the current file pointer until the next delimiter (,) or the end EOF (thus it reads the numbers one by one).
 The reason we use a stream to read from the file is that all the records are in one line and therefore any way of reading which would read the whole line would be very memory intensive and thus inefficient.
 
-##Assumptions
+## Assumptions
 - This implementation assumes that the file contains only numbers separated by comma and that they are all in one line and it does not perform any validation on the data found in the files.
 - The numbers in the files are sorted without removing any duplication.
 
-##Algorithms
+## Algorithms
 The implementation for each algorithm is found in the each class (under the Algorithms directory).
 
-### myTestAlgorithm
+### - myTestAlgorithm
 This was my first attempt to implement a sorting algorithm. I later discovered that it is very similar to the "Insertion" algorithm.
 For every number that it gets from the file, it simply loops through the "Sorted" array and put's it in the right place.
 This is the third fastest algorithm implemented.
 
-### bubblesort
+### - bubblesort
 The slowest algorithm of the four. It loops through the array and compares the current value with the next. It then swaps them if required. The process is repeated until no swaps are necessary.
 
-### selectionSort
+### - selectionSort
 This is the second fastest algorithm implemented.
 It loops through the unsorted array. It finds the smallest value and moves it to the sorted array (appends).
 It seemingly only loops through the unsorted array once, but finding the smallest value every time (min) adds another loop within.
 
-### quicksort
+### - quicksort
 By far the fastest algorithm implemented.
 It first picks a random number (e.g the first). It then compares all the elements against it. Anything smaller is placed before it and anything larger after.
 This puts the pivot number in the right place.
 Then, each of the two groups (before and after the pivot) goes through the same process individually until the whole array is sorted.
 
-###Performance
+### Performance
 Here is some performance comparison between the algorithms for the same set of data:
 Algorithm (class used): bubblesort
 Time passed: 54.608314990997 Seconds

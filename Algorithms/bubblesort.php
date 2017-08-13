@@ -37,8 +37,6 @@ class bubblesort
         while (!$this->bSorted)
         {
             $bThisIterationSwappedAny = FALSE;
-//            foreach ($this->aRaw as $key => $value)
-            
             for ($i=0; $i<$this->max; $i++)
             {
                 if (isset($this->aRaw[$i+1])&&$this->aRaw[$i]>$this->aRaw[$i+1])
