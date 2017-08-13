@@ -8,6 +8,8 @@ define('FILE1out', './files/output/sorted_100.txt');
 define('FILE2out', './files/output/sorted_10000.txt');
 define('FILE3out', './files/output/sorted_10000000.txt');
 
+define('MICROSECONDS', '0');
+
 require_once 'timeEnd.php';
 require_once 'fileOpen.php';
 require_once 'writeToFile.php';

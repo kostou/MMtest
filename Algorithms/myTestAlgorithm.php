@@ -51,6 +51,10 @@ class myTestAlgorithm
                         $this->aSorted[] = $this->currentNumber;
                         break;
                     }
+                    if (MICROSECONDS>0)
+                    {
+                       usleep(MICROSECONDS); 
+                    }
                 }
             }
         }

@@ -29,6 +29,10 @@ class selectionSort
             $this->currentFilePointer = ftell($fileHandle);
             $this->currentNumber = stream_get_line($fileHandle, 1024, ",");
             $this->aRaw[] = $this->currentNumber;
+            if (MICROSECONDS>0)
+            {
+               usleep(MICROSECONDS); 
+            }
         }
         
         foreach ($this->aRaw as $value)
@@ -36,6 +40,10 @@ class selectionSort
             $smallestValueKey = array_search(min($this->aRaw),$this->aRaw);
             $this->aSorted[] = $this->aRaw[$smallestValueKey];
             unset($this->aRaw[$smallestValueKey]);
+            if (MICROSECONDS>0)
+            {
+               usleep(MICROSECONDS); 
+            }
         }
         fclose($fileHandle);
     }

@@ -33,6 +33,10 @@ class quicksort
             $this->aRaw[$this->loopCounter-1] = $this->currentNumber;
             $this->loopCounter++;
             $this->aRaw->setSize(($this->loopCounter));
+            if (MICROSECONDS>0)
+            {
+               usleep(MICROSECONDS); 
+            }
         }
         $this->aRaw->setSize(($this->loopCounter-1));
         $this->aSorted = new \SplFixedArray(count($this->aRaw));
@@ -43,7 +47,7 @@ class quicksort
     private function sorting(&$aUnsorted)
     {
         if (count($aUnsorted)<=1)
-        {//There is only one element, so this array partition is sorted..
+        {//There is only zero or one elements, so this array partition is sorted..
             return $aUnsorted;
         }
         $pivotPoint = $aUnsorted[0];
@@ -63,6 +67,10 @@ class quicksort
             else
             {
                 $aPivotPoint[] = $value;
+            }
+            if (MICROSECONDS>0)
+            {
+               usleep(MICROSECONDS); 
             }
         }
         return array_merge($this->sorting($aBeforePivotPoint), $aPivotPoint, $this->sorting($aAfterPivotPoint));

@@ -1,6 +1,6 @@
 # MMtest - KT
 
-This project serves the purpose of demonstrating a the use of different sorting algorithms in order to sort a list of numbers stored in a file.
+This project serves the purpose of demonstrating the use of different sorting algorithms in order to sort a list of numbers stored in a file.
 
 ## Execution
 Processing can be started by executing index.php while passing two parameters. The algorithm name and a number (1-3). 
@@ -54,25 +54,29 @@ By far the fastest algorithm implemented.
 It first picks a random number (e.g the first). It then compares all the elements against it. Anything smaller is placed before it and anything larger after.
 This puts the pivot number in the right place.
 Then, each of the two groups (before and after the pivot) goes through the same process individually until the whole array is sorted.
+In this algorithm implementation, I have also used fixed arrays (with the use of SplFixedArray class) because they have smaller memory footprint. The only downside is that since they are fixed by nature, they require to constantly (and manually) manage their size which adds extra processing steps and therefore a small delay. This is because I (pretend) I don't know how many numbers/elements there are in the file and therefore I keep increasing the size with each one I read from the stream.
 
 ### Performance
-Here is some performance comparison between the algorithms for the same set of data:
+- Here is some performance comparison (time and memory usage) between the algorithms for the same set of data:
 Algorithm (class used): bubblesort
-Time passed: 54.608314990997 Seconds
-Peak memory usage: 1.2010040283203 MB
+Time passed: 98.788156986237 Seconds
+Peak memory usage: 1.2069702148438 MB
 
 Algorithm (class used): quicksort
-Time passed: 0.060135126113892 Seconds
-Peak memory usage: 3.1707458496094 MB
+Time passed: 0.083114862442017 Seconds
+Peak memory usage: 2.9879608154297 MB
 
 Algorithm (class used): selectionSort
-Time passed: 8.0624659061432 Seconds
-Peak memory usage: 2.209716796875 MB
+Time passed: 9.4087629318237 Seconds
+Peak memory usage: 2.2146759033203 MB
 
 Algorithm (class used): myTestAlgorithm
-Time passed: 36.947177171707 Seconds
-Peak memory usage: 1.3511505126953 MB
+Time passed: 30.58013677597 Seconds
+Peak memory usage: 1.3550262451172 MB
  
-
+- In terms of CPU utilisation, any script when running and there's no blocking or waiting (for something external to finish) tries to utilise all available CPU cycles. This is especially obvious when using loops. Therefore, the only way for our scripts to use less CPU cycles is to artifically introduce some delays (usleep) which frees up the CPU for the defined time.
+In this implementation this can be changed in the config.php file.
+A more sophisticated solution would be to constantly monitor the actual CPU utilisation (by executing system commands) and introduce sleep when exceeding some threshold, but it could require more research and it could also potentially be platform and system specific.
+ 
 
 

@@ -46,6 +46,10 @@ class bubblesort
                     $this->aRaw[$i+1]=$tmpGreater;
                     $bThisIterationSwappedAny = TRUE;
                 }
+                if (MICROSECONDS>0)
+                {
+                   usleep(MICROSECONDS); 
+                }
             }
             if ($bThisIterationSwappedAny===FALSE)
             {

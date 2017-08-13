@@ -1,7 +1,7 @@
 <?php
 require_once 'errorHandling.php';
 require_once 'config.php';
-ini_set('memory_limit', '1024M');
+ini_set('memory_limit', '-1');
 
 $className = "";
 if (isset($argv[1]))
