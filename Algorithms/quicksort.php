@@ -24,22 +24,23 @@ class quicksort
     {
         $oFileOpen = new fileOpen($filePath);
         $fileHandle = $oFileOpen->getHandle();
-        $this->loopCounter = 0;
-        $this->aRaw = new \SplFixedArray(($this->loopCounter+1));
+        $this->loopCounter = 1;
+        $this->aRaw = new \SplFixedArray(($this->loopCounter));
         while (!feof($fileHandle))
         {
             $this->currentFilePointer = ftell($fileHandle);
             $this->currentNumber = stream_get_line($fileHandle, 1024, ",");
-            $this->aRaw[$this->loopCounter] = $this->currentNumber;
+            $this->aRaw[$this->loopCounter-1] = $this->currentNumber;
             $this->loopCounter++;
-            $this->aRaw->setSize(($this->loopCounter+1));
+            $this->aRaw->setSize(($this->loopCounter));
         }
+        $this->aRaw->setSize(($this->loopCounter-1));
         $this->aSorted = new \SplFixedArray(count($this->aRaw));
         $this->aSorted = $this->sorting($this->aRaw);
         fclose($fileHandle);
     }
     
-    private function sorting($aUnsorted)
+    private function sorting(&$aUnsorted)
     {
         if (count($aUnsorted)<=1)
         {//There is only one element, so this array partition is sorted..
